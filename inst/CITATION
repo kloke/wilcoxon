@@ -1,0 +1,16 @@
+citHeader("To cite wilcoxon in publications, please use:")
+
+bibentry(
+  bibtype   = "Book",
+  author    = c(person(given = "John D.",   family = "Kloke"),
+                person(given = "Joseph W.", family = "McKean")),
+  title     = "Nonparametric Statistical Methods Using R, 2nd Edition",
+  year      = 2024,
+  publisher = "Chapman-Hall",
+  address   = "Boca Raton, FL",
+  textVersion = paste(
+    "Kloke, J.D. and McKean, J.W. (2024),",
+    "Nonparametric Statistical Methods Using R, 2nd Edition",
+    "Boca Raton, FL: Chapman-Hall."
+  )
+)

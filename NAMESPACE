@@ -1,0 +1,11 @@
+export(wilcoxon_test)
+export(wilcoxon_ci_1)
+export(wilcoxon_ci_1_exact)
+export(wilcoxon_ci_1_uniroot)
+export(wilcoxon_ci_2)
+export(wilcoxon_ci_2_exact)
+export(wilcoxon_ci_2_uniroot)
+export(wilcoxon_ci_2_toms516)
+
+importFrom(stats, median, pnorm, psignrank, pwilcox, qnorm, qsignrank,
+           qwilcox, uniroot, wilcox.test)

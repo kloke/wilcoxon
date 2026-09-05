@@ -1,0 +1,22 @@
+Package: wilcoxon
+Type: Package
+Title: Wilcoxon Tests and Hodges-Lehmann Estimation for the One- and
+    Two-Sample Location Problems
+Version: 0.0.4
+Date: 2026-09-05
+Author: John Kloke, Joseph McKean
+Maintainer: John Kloke <johndkloke@gmail.com>
+Description: Wilcoxon signed-rank and rank-sum inference for the one- and
+    two-sample location problems, with Hodges-Lehmann point estimates and
+    distribution-free confidence intervals.  The main driver, wilcoxon_test,
+    provides an htest-compatible interface; the confidence interval and point
+    estimate use validated implementations that avoid the off-by-one indexing
+    of stats::wilcox.test.  Multiple algorithms are available for the
+    confidence interval: direct construction, root-finding via uniroot, and
+    (two-sample only) an R port of the Illinois-modified regula falsi
+    algorithm of Ryan and McKean (1977, TOMS Algorithm 516).
+License: GPL (>= 2)
+Imports: stats
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
