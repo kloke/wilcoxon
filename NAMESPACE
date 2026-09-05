@@ -6,6 +6,8 @@ export(wilcoxon_ci_2)
 export(wilcoxon_ci_2_exact)
 export(wilcoxon_ci_2_uniroot)
 export(wilcoxon_ci_2_toms516)
+export(wilcoxon_ci_2_toms516_port)
+export(wilcoxon_ci_2_toms516_vec)
 
 importFrom(stats, median, pnorm, psignrank, pwilcox, qnorm, qsignrank,
            qwilcox, uniroot, wilcox.test)

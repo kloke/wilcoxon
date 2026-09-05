@@ -3,6 +3,8 @@
 \alias{wilcoxon_ci_2_exact}
 \alias{wilcoxon_ci_2_uniroot}
 \alias{wilcoxon_ci_2_toms516}
+\alias{wilcoxon_ci_2_toms516_port}
+\alias{wilcoxon_ci_2_toms516_vec}
 \title{Two-Sample Wilcoxon Confidence Interval and Hodges-Lehmann Estimate}
 \description{
   Distribution-free confidence interval for the shift parameter
@@ -28,7 +30,10 @@ wilcoxon_ci_2(x, y, conf.int = TRUE, conf.level = 0.95,
 
 wilcoxon_ci_2_exact  (x, y, conf.int = TRUE, conf.level = 0.95)
 wilcoxon_ci_2_uniroot(x, y, conf.int = TRUE, conf.level = 0.95, \dots)
-wilcoxon_ci_2_toms516(x, y, conf.int = TRUE, conf.level = 0.95)
+wilcoxon_ci_2_toms516(x, y, conf.int = TRUE, conf.level = 0.95,
+                      variant = c("vec", "port"))
+wilcoxon_ci_2_toms516_vec (x, y, conf.int = TRUE, conf.level = 0.95)
+wilcoxon_ci_2_toms516_port(x, y, conf.int = TRUE, conf.level = 0.95)
 }
 \arguments{
   \item{x, y}{numeric vectors of observations from the two samples.}
@@ -47,6 +52,11 @@ wilcoxon_ci_2_toms516(x, y, conf.int = TRUE, conf.level = 0.95)
     most useful is \code{tol} (default
     \code{.Machine$double.eps^0.25} \eqn{\approx 1.2 \times 10^{-4}}).
     Ignored by the \code{"exact"} and \code{"toms516"} backends.}
+  \item{variant}{character; only for \code{wilcoxon_ci_2_toms516}.
+    Selects the \eqn{U}{U} evaluator: \code{"vec"} (default,
+    \code{findInterval}-based) or \code{"port"} (interpreted R
+    two-pointer walk).  Results are identical up to numerical noise;
+    the choice is a speed/pedagogy trade-off.}
 }
 \details{
   \strong{Exact backend.}  Materialises all \eqn{mn}{mn} pairwise
@@ -70,9 +80,15 @@ wilcoxon_ci_2_toms516(x, y, conf.int = TRUE, conf.level = 0.95)
   falsi algorithm of Ryan and McKean (1977).  The Mann-Whitney
   \eqn{U(\Delta) = \#\{(i,j) : x_i - y_j > \Delta\}}{U(Delta) = #{(i,j) : x[i] - y[j] > Delta}}
   is evaluated in \eqn{O(m+n)}{O(m+n)} by a two-pointer walk over the
-  sorted arrays (\code{fmann}), and the Illinois-modified regula falsi
-  root-finder (\code{ill}) inverts \eqn{U}{U} at half-integer targets.
-  Deviations from the original Fortran are documented in the source.
+  sorted arrays, and the Illinois-modified regula falsi root-finder
+  (\code{ill}) inverts \eqn{U}{U} at half-integer targets.  Two variants
+  are provided: \code{"vec"} (the default) uses
+  \code{\link[base]{findInterval}} for the \eqn{U}{U} evaluator, giving
+  a compiled inner loop and a large constant-factor speedup over
+  \code{"port"}, which is a faithful line-by-line port of the original
+  Fortran with the two-pointer walk written in R.  Deviations from the
+  original Fortran are documented in the source of
+  \code{wilcoxon_ci_2_toms516_port}.
 
   \strong{Why not use \code{wilcox.test}'s confidence interval?}  See
   the \sQuote{Details} section of \code{\link{wilcoxon_test}}.

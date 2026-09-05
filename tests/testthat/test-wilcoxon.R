@@ -27,15 +27,19 @@ test_that("one-sample backends agree", {
 })
 
 test_that("two-sample backends agree", {
-  ex <- wilcoxon_ci_2_exact  (x1, y1)
-  un <- wilcoxon_ci_2_uniroot(x1, y1)
-  to <- wilcoxon_ci_2_toms516(x1, y1)
+  ex   <- wilcoxon_ci_2_exact       (x1, y1)
+  un   <- wilcoxon_ci_2_uniroot     (x1, y1)
+  tvec <- wilcoxon_ci_2_toms516_vec (x1, y1)
+  tprt <- wilcoxon_ci_2_toms516_port(x1, y1)
   expect_equal(un$estimate,   ex$estimate,   tolerance = tol)
-  expect_equal(to$estimate,   ex$estimate,   tolerance = tol)
+  expect_equal(tvec$estimate, ex$estimate,   tolerance = tol)
+  expect_equal(tprt$estimate, ex$estimate,   tolerance = tol)
   expect_equal(un$conf.int,   ex$conf.int,   tolerance = tol)
-  expect_equal(to$conf.int,   ex$conf.int,   tolerance = tol)
+  expect_equal(tvec$conf.int, ex$conf.int,   tolerance = tol)
+  expect_equal(tprt$conf.int, ex$conf.int,   tolerance = tol)
   expect_equal(un$conf.level, ex$conf.level)
-  expect_equal(to$conf.level, ex$conf.level)
+  expect_equal(tvec$conf.level, ex$conf.level)
+  expect_equal(tprt$conf.level, ex$conf.level)
 })
 
 ## ---- 2. Point estimate matches wilcox.test -------------------------------

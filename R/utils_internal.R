@@ -41,6 +41,20 @@ fmann <- function(delta, xs, ys) {
   m * n - ile
 }
 
+## fmann_vec: same output as fmann, computed with findInterval.
+##
+## findInterval(v, sorted) walks a single pointer along `sorted` (which
+## must be non-decreasing) and returns, for each element of v, the count
+## of `sorted` values <= that element.  Because `sorted` is sorted and
+## the walk is linear, complexity is O(m + n), the same as the two-pointer
+## FMANN.  The gains over fmann are pure R-loop-overhead vs C-loop-
+## overhead: for m = n in the hundreds the compiled findInterval loop is
+## typically two to three orders of magnitude faster than the interpreted
+## fmann loop.
+fmann_vec <- function(delta, xs, ys) {
+  length(xs) * length(ys) - sum(findInterval(xs + delta, ys))
+}
+
 ## ill: Illinois-modified regula falsi.  Solves Fun(t) = target for a
 ## monotone Fun, given a bracket (x1, x2) with function values (f1, f2)
 ## straddling the target.  Faithful translation of the ILL subroutine of

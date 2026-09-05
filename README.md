@@ -1,4 +1,4 @@
-# wilcoxon - developmental version
+# wilcoxon
 
 Wilcoxon signed-rank and rank-sum inference for the one- and two-sample
 location problems, with Hodges-Lehmann point estimates and distribution-free
@@ -26,15 +26,15 @@ set.seed(1)
 x <- rnorm(20)
 y <- rnorm(25, mean = 0.5)
 
-wilcoxon_test(x, y, conf.int=TRUE)
+wilcoxon_test(x, y)
 ```
 
 Direct access to the CI functions is also available for tuning or programmatic
 use:
 
 ```r
-wilcoxon_ci_1(x)     # one-sample
-wilcoxon_ci_2(x, y)  # two-sample
+wilcoxon_ci_1(x)                                  # one-sample
+wilcoxon_ci_2(x, y, method = "uniroot", tol = 1e-8)  # tuned root-finder
 ```
 
 ## Backends
